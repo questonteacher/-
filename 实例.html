@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D 地图旅游指南</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 这个后面的引入是elementui的默认样式 -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- 这个引入的是vue.js的库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.full.js"></script>
+  <!-- 这个引入的是element的样式表库，unpkg的话作用就是可以帮你引入所有在npm上的安装包啊，库啊之类的，具体格式是这样的，要是有兴趣可以看看这个网站：https://unpkg.com/，不过说实话就一点点也没什么有意义的东西，看看格式就OK了 -->
+</head>
+<body>
+  <div id="app">
+
+    <div class="background-image">
+<!-- 在这里写图片的url，用样式就ok -->
+    </div>
+    <el-container>
+      <el-header>
+        <h1>基于 Unity3D 的地图旅游指南</h1>
+        <p>探索世界，体验自动导航功能</p>
+      </el-header>
+      <el-main>
+        <el-input placeholder="搜索景点、地点等" prefix-icon="el-icon-search"></el-input>
+        <h2>热门景点推荐</h2>
+        <el-row>
+          <el-col :span="6" v-for="spot in popularSpots" :key="spot.id">
+            <el-card :body-style="{ padding: '0' }">
+              <img :src="spot.image" class="image">
+              <div style="padding: 14px;">
+                <span>{{ spot.name }}</span>
+                <!-- 这个是vue.js的表达式，就是即时动态的获取实例中的这个值，在spot中获取name值，你要是不喜欢这个名字可以写其他的实例，什么slit之类的都无所谓，记得在实列里调试好就ok，记得是上面这一行 -->
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+      </el-main>
+    </el-container>
+  </div>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          popularSpots: [
+            { id: 1, name: '景点1', image: '这里写图片的引用网址' },
+            { id: 2, name: '景点2', image: '同上' },
+            { id: 3, name: '景点3', image: '同上' },
+            { id: 4, name: '景点4', image: '+1' }
+          ]
+        };
+      }
+    });
+
+    app.use(ElementUI);
+    app.mount('#app');
+  </script>
+  <!-- 39-55行看完vue就会很简单，看会一点应该就没问题，记得看完vue -->
+  <style>
+    body, html, #app, .background-image, .el-container {
+      height: 100%;
+      margin: 0;
+    }
+    .background-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-size: cover;
+      background-position: center center;
+/* 陈桑，在这里写图片的url */
+      background-image: url('your-image-url');
+    }
+    .el-header {
+      text-align: center;
+      padding: 50px 
+      0;
+  background: rgba(255, 255, 255, 0.8);
+}
+.el-main {
+  text-align: center;
+  padding: 30px 0;
+  background: rgba(255, 255, 255, 0.8);
+}
+.el-footer {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+.image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+h1, h2 {
+  margin: 10px 0;
+}
+p {
+  margin: 0;
+}
+/* backgroundcolor你随便调了，调的顺眼一点就OK了 */
+  </style>
+</body>
+</html>
+<!-- 以上就是首页的大概设计和流程，具体ui设计我完了试着从figma上导出来，这破玩意实在用着不顺手，其他的有问题找我 -->
